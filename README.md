@@ -13,3 +13,5 @@ A Telegram bot to monitor and kick inactive members from groups automatically.
 ```bash
 git clone https://github.com/saikatwtf/inactive-kick-bot.git
 cd inactive-kick-bot
+pip install -r requirements.txt
+python3 bot.py
