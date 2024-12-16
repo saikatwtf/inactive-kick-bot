@@ -2,14 +2,15 @@ from pymongo import MongoClient
 from telegram import Update
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
 import datetime
+import config  # Import the config module
 
 # MongoDB setup
-client = MongoClient("mongodb://localhost:27017/")  # Replace with your MongoDB URI
-db = client['telegram_bot']
-users_collection = db['users']  # Collection to store user activity
+client = MongoClient(config.MONGO_URI)
+db = client[config.MONGO_DB_NAME]
+users_collection = db[config.MONGO_COLLECTION_NAME]
 
 # Inactivity threshold (in days)
-INACTIVITY_THRESHOLD = 7
+INACTIVITY_THRESHOLD = config.INACTIVITY_THRESHOLD
 
 # Command: Start
 def start(update: Update, context: CallbackContext) -> None:
@@ -67,7 +68,7 @@ def kick_inactive(update: Update, context: CallbackContext) -> None:
             update.message.reply_text(f"Failed to kick {username}: {e}")
 
 # Command: Start Monitoring
-def start_monitoring(update: Update, context: CallbackContext) -> None:
+def monitoring(update: Update, context: CallbackContext) -> None:
     chat_id = update.message.chat_id
     context.job_queue.run_repeating(
         check_inactivity, interval=3600, first=10, context=chat_id
@@ -94,15 +95,15 @@ def check_inactivity(context: CallbackContext) -> None:
 
 # Main function
 def main():
-    # Replace 'YOUR_API_TOKEN' with your actual Bot API token
-    updater = Updater("YOUR_API_TOKEN")
+    # Initialize the bot with API token from config
+    updater = Updater(config.API_TOKEN)
     dispatcher = updater.dispatcher
 
     # Command handlers
     dispatcher.add_handler(CommandHandler("start", start))
-    dispatcher.add_handler(CommandHandler("active_users", show_active))
-    dispatcher.add_handler(CommandHandler("kick_inactive", kick_inactive))
-    dispatcher.add_handler(CommandHandler("start_monitoring", start_monitoring))
+    dispatcher.add_handler(CommandHandler("active", show_active))
+    dispatcher.add_handler(CommandHandler("kickinactives", kick_inactive))
+    dispatcher.add_handler(CommandHandler("monitoring", monitoring))
 
     # Message handler to track activity
     dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, track_activity))
