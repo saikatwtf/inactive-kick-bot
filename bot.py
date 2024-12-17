@@ -5,6 +5,9 @@ import datetime
 import config  # Import config module
 import re  # To parse the threshold duration
 
+#Dont Remove My Credit @AnnihilusOP 
+#This Repo Is By SaikatWtf 
+# For Any Kind Of Error Ask Us In my bot @annihilusop_bot
 
 # MongoDB setup
 client = MongoClient(config.MONGO_URI)
@@ -164,9 +167,9 @@ def main():
 
     # Command handlers
     dispatcher.add_handler(CommandHandler("start", start))
-    dispatcher.add_handler(CommandHandler("monitor", monitor))
-    dispatcher.add_handler(CommandHandler("kick_inactive", kick_inactive))
-    dispatcher.add_handler(CommandHandler("active_users", show_active))
+    dispatcher.add_handler(CommandHandler("sudo", monitor))
+    dispatcher.add_handler(CommandHandler("kickinactive", kick_inactive))
+    dispatcher.add_handler(CommandHandler("active", show_active))
 
     # Message handler to track activity
     dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, track_activity))
