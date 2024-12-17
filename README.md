@@ -7,6 +7,17 @@ A Telegram bot to monitor and kick inactive members from groups automatically.
 - Automatically kicks users inactive for a specified duration.
 - Easy to configure and deploy.
 
+### Bot COMMANDS
+
+<b><details><summary>Tap On Me For Commands</summary>
+```
+start - sᴛᴀʀᴛ ᴛʜᴇ ʙᴏᴛ.
+sudo - Start / Stop monitoring
+active - Check Active List
+kickinactive - Kicked inactive users
+```
+</b>
+</details>
 ## Setup
 
 ### 1. Clone the Repository and run...
