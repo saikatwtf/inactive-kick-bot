@@ -102,7 +102,7 @@ def kick_inactive(update: Update, context: CallbackContext) -> None:
     monitoring_collection = db["monitoring_groups"]
 
     if not monitoring_collection.find_one({"chat_id": chat_id}):
-        update.message.reply_text("Monitoring is not enabled for this group. Use /monitor to enable it.")
+        update.message.reply_text("Monitoring is not enabled for this group. Use /sudo to enable it.")
         return
 
     collection = db[f"group_{chat_id}"]
@@ -111,7 +111,7 @@ def kick_inactive(update: Update, context: CallbackContext) -> None:
         # Parse the duration from the command arguments
         duration = context.args[0] if context.args else None
         if not duration:
-            update.message.reply_text("Please specify a duration (e.g., /kick_inactive 7d).")
+            update.message.reply_text("Please specify a duration (e.g., /kickinactive 7d).")
             return
         threshold_duration = parse_duration(duration)
 
