@@ -42,8 +42,8 @@ def start(update: Update, context: CallbackContext) -> None:
     update.message.reply_text(
         "Hi! I am the Inactivity Kicker Bot.\n"
         "I will monitor inactivity in this group and clean up as needed.\n"
-        "Use /monitor to toggle activity tracking on or off.\n"
-        "Use /kick_inactive <duration> to kick inactive users.\n"
+        "Use /sudo to toggle activity tracking on or off.\n"
+        "Use /kickinactive <duration> to kick inactive users.\n"
         "Only admins can use these commands."
     )
 
